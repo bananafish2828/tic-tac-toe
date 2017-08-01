@@ -36,6 +36,25 @@ let board = {
       board[position] = 'O';
     }
     board.count ++;
+  },
+
+  checkBoard: (position) => {
+    let marker = board[position]
+    let win = false;
+    for (let idx = 0; idx < 3; idx ++) {
+      if (board[idx * 3 + 1] === marker && board[idx * 3 + 2] === marker && board[idx * 3 + 3] === marker) {
+        win = true;
+      }
+      if (board[1 + idx] === marker && board[4 + idx] === marker && board[7 + idx] === marker) {
+        win = true;
+      }
+    }
+    if ((board[1] === marker && board[5] === marker && board[9] === marker) ||
+      (board[3] === marker && board[5] === marker && board[7] === marker)) {
+        win = true;
+      }
+    if (win) console.log(marker + ' wins');
+    return win;  
   }
 
 
@@ -54,3 +73,9 @@ board.markBoard(0);
 board.markBoard(11);
 board.markBoard('a');
 board.markBoard(7);
+board.markBoard(6);
+board.showBoard();
+board.checkBoard(6);
+board.markBoard(2);
+board.showBoard();
+board.checkBoard(2);
